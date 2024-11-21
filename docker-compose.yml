@@ -1,0 +1,40 @@
+version: '3.9'
+
+services:
+  app:
+    image: node:20
+    container_name: adonis-container
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "3333:3333" # Expose AdonisJS port
+    environment:
+      NODE_ENV: development
+      DB_HOST: postgres # Connect to the Postgres service
+      DB_PORT: 5432
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_DATABASE: ${DB_DATABASE}
+    depends_on:
+      - postgres # Ensure the Postgres container starts first
+    command: >
+      bash -c "npm install &&
+               node ace migration:run &&
+               npm run dev"
+
+  postgres:
+    image: postgres:15
+    container_name: postgres-container
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    ports:
+      - "5432:5432" # Expose PostgreSQL port
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
