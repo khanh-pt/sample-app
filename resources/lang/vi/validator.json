@@ -1,0 +1,10 @@
+{
+  "shared": {
+    "fields": {
+      "email": "email"
+    },
+    "messages": {
+      "database.unique": "{field} đã tồn tại"
+    }
+  }
+}

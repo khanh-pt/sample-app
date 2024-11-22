@@ -4,17 +4,20 @@ import User from '#models/user'
 import { errors } from '@vinejs/vine'
 
 export default class AuthController {
-  async register({ request }: HttpContext) {
+  async register({ request, response, i18n }: HttpContext) {
     console.log(123);
 
     try {
       const data = await request.validateUsing(registerValidator)
       const user = await User.create(data)
 
-      return User.accessTokens.create(user)
+      response.status(200).send( {
+        message: i18n.t('auth.register.succes'),
+        data: User.accessTokens.create(user)
+      })
     } catch (error) {
       if (error instanceof errors.E_VALIDATION_ERROR) {
-        return { message: 'fail', errors: error.messages }
+        response.status(400).send({ message: i18n.t('auth.register.fail'), errors: error.messages })
       }
     }
   }

@@ -1,0 +1,10 @@
+{
+  "shared": {
+    "fields": {
+      "email": "email"
+    },
+    "messages": {
+      "database.unique": "The {field} has already been taken"
+    }
+  }
+}
