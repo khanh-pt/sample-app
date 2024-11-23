@@ -16,8 +16,6 @@ export const responseJson = ({
   data,
   errors,
 }: responseJsonType) => {
-  console.log({ data })
-
   return response.status(status).send({
     success,
     message,

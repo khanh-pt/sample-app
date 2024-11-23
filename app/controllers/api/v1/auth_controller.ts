@@ -53,23 +53,28 @@ export default class AuthController {
     }
   }
 
-  async logout({ auth }: HttpContext) {
-    console.log({ 'auth.user': auth.user })
-
+  async logout({ response, auth, i18n }: HttpContext) {
     const user = auth.user!
 
     await User.accessTokens.delete(user, user.currentAccessToken.identifier)
-    return { message: 'success' }
+
+    responseJson({
+      response,
+      success: true,
+      status: 200,
+      message: i18n.t('auth.logout.success'),
+    })
   }
 
-  async me({ auth }: HttpContext) {
-    try {
-      await auth.check()
-      return {
-        user: auth.user,
-      }
-    } catch (error) {
-      console.log({ error })
-    }
+  async me({ response, auth, i18n }: HttpContext) {
+    await auth.check()
+
+    responseJson({
+      response,
+      success: true,
+      status: 200,
+      message: i18n.t('auth.me.success'),
+      data: auth.user,
+    })
   }
 }
