@@ -8,6 +8,7 @@ services:
     volumes:
       - .:/usr/src/app
     ports:
+      - '9229:9229' # Expose debugging port
       - '3333:3333' # Expose AdonisJS port
     environment:
       NODE_ENV: development
@@ -21,7 +22,7 @@ services:
     command: >
       bash -c "npm install &&
                node ace migration:run &&
-               npm run dev"
+               npm run debug"
 
   postgres:
     image: postgres:15

@@ -8,6 +8,7 @@
     "start": "node bin/server.js",
     "build": "node ace build",
     "dev": "node ace serve --hmr",
+    "debug": "node ace --inspect=0.0.0.0 serve --watch",
     "test": "node ace test",
     "lint": "eslint .",
     "format": "prettier --write .",

@@ -14,3 +14,37 @@
 - Thêm các biến môi trường vào file ".env" dựa theo các key trong file ".env.example"
 - Run command: `node ace generate:key`
 - Start with docker: `docker-compose up`
+
+#### Run and debug using VSCode
+
+`package.json`
+
+```json
+"scripts": {
+    "dev": "node ace serve --hmr",
+    "debug": "node ace --inspect=0.0.0.0 serve --watch",
+  },
+```
+
+`.vscode/launch.json`
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Attach to Adonis App",
+      "type": "node",
+      "request": "attach",
+      "localRoot": "${workspaceFolder}",
+      "remoteRoot": "/usr/src/app",
+      "port": 9229,
+      "address": "localhost",
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true
+    }
+  ]
+}
+```
+
+`npm run debug`
