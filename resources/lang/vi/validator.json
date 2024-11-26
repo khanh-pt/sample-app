@@ -5,8 +5,10 @@
       "password": "mật khẩu"
     },
     "messages": {
-      "database.unique": "{field} đã tồn tại",
-      "minLength": "{field} phải có ít nhất {min} ký tự"
+      "database.unique": "Trường {field} đã tồn tại",
+      "minLength": "Trường {field} phải có ít nhất {min} ký tự",
+      "email": "Trường {field} phải là một địa chỉ hợp lệ",
+      "required": "Trường {field} là bắt buộc"
     }
   }
 }
