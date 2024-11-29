@@ -48,3 +48,13 @@
 ```
 
 `npm run debug`
+
+#### VSCode extension
+
+https://marketplace.visualstudio.com/items?itemName=jripouteau.adonis-vscode-extension
+https://marketplace.visualstudio.com/items?itemName=jripouteau.japa-vscode
+https://marketplace.visualstudio.com/items?itemName=Lokalise.i18n-ally
+
+#### Config VSCode extension
+
+https://docs.adonisjs.com/guides/digging-deeper/i18n#configuring-the-i18n-ally-vscode-extension

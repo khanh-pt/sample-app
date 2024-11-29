@@ -1,1 +1,12 @@
-{}
+{
+  "shared": {
+    "fields": {
+      "email": "email",
+      "password": "password"
+    },
+    "messages": {
+      "required": "bắt buộc",
+      "filter.invalid_key": "Field {field} contain invalid keys: {invalidKeys}"
+    }
+  }
+}

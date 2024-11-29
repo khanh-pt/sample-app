@@ -1,14 +1,14 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import { loginValidator, registerValidator } from '#validators/auth'
 import User from '#models/user'
-import { responseJson } from '#abilities/index'
+import { ResponseJson } from '#abilities/index'
 
 export default class AuthController {
   async register({ request, response, i18n }: HttpContext) {
     const data = await request.validateUsing(registerValidator)
     const user = await User.create(data)
 
-    responseJson({
+    ResponseJson({
       response,
       success: true,
       status: 200,
@@ -21,7 +21,7 @@ export default class AuthController {
     const { email, password } = await request.validateUsing(loginValidator)
     const user = await User.verifyCredentials(email, password)
 
-    responseJson({
+    ResponseJson({
       response,
       success: true,
       status: 200,
@@ -35,7 +35,7 @@ export default class AuthController {
 
     await User.accessTokens.delete(user, user.currentAccessToken.identifier)
 
-    responseJson({
+    ResponseJson({
       response,
       success: true,
       status: 200,
@@ -44,7 +44,7 @@ export default class AuthController {
   }
 
   async me({ response, auth, i18n }: HttpContext) {
-    responseJson({
+    ResponseJson({
       response,
       success: true,
       status: 200,

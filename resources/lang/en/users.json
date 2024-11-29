@@ -1,0 +1,6 @@
+{
+  "index": {
+    "success": "Get list success",
+    "fail": "Get list failed"
+  }
+}

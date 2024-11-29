@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, scope } from '@adonisjs/lucid/orm'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 
@@ -30,4 +30,27 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare updatedAt: DateTime | null
 
   static accessTokens = DbAccessTokensProvider.forModel(User)
+
+  static filter = scope((query, filter: Record<string, string>) => {
+    Object.entries(filter).forEach(([key, value]) => {
+      let columns = key.split('_')
+      const operation = columns.pop()
+      columns = columns.join('_').split('_or_')
+
+      switch (operation) {
+        case 'cont':
+          columns.forEach((col) => {
+            query.orWhere(col, 'ILIKE', `%${value}%`)
+          })
+          break
+        case 'eq':
+          columns.forEach((col) => {
+            query.orWhere(col, value)
+          })
+          break
+        default:
+          break
+      }
+    })
+  })
 }

@@ -8,7 +8,8 @@
       "database.unique": "Trường {field} đã tồn tại",
       "minLength": "Trường {field} phải có ít nhất {min} ký tự",
       "email": "Trường {field} phải là một địa chỉ hợp lệ",
-      "required": "Trường {field} là bắt buộc"
+      "required": "Trường {field} là bắt buộc",
+      "filter.invalid_key": "Trường {field} chứa thuộc tính không hợp lệ: {invalidKeys}"
     }
   }
 }

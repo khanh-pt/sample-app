@@ -25,6 +25,6 @@ router
 
 router
   .group(() => {
-    router.resource('users', ManagerUsersController).only(['store']).as('manager.users')
+    router.resource('users', ManagerUsersController).only(['index']).as('manager.users')
   })
   .prefix('api/v1/manager')

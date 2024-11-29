@@ -3,7 +3,7 @@ import { HttpContext, ExceptionHandler } from '@adonisjs/core/http'
 import type { StatusPageRange, StatusPageRenderer } from '@adonisjs/core/types/http'
 import { errors as vineErrors } from '@vinejs/vine'
 import { errors as authErrors } from '@adonisjs/auth'
-import { responseJson } from '#abilities/index'
+import { ResponseJson } from '#abilities/index'
 
 export default class HttpExceptionHandler extends ExceptionHandler {
   /**
@@ -38,7 +38,7 @@ export default class HttpExceptionHandler extends ExceptionHandler {
    */
   async handle(error: unknown, ctx: HttpContext) {
     if (error instanceof vineErrors.E_VALIDATION_ERROR) {
-      responseJson({
+      ResponseJson({
         response: ctx.response,
         success: false,
         status: error.status,
@@ -48,7 +48,7 @@ export default class HttpExceptionHandler extends ExceptionHandler {
       return
     }
     if (error instanceof authErrors.E_INVALID_CREDENTIALS) {
-      responseJson({
+      ResponseJson({
         response: ctx.response,
         success: false,
         status: error.status,

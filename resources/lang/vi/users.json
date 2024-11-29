@@ -1,0 +1,6 @@
+{
+  "index": {
+    "success": "Nhận danh sách thành công",
+    "fail": "Lấy danh sách thất bại"
+  }
+}

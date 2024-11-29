@@ -1,24 +1,27 @@
 import type { Response } from '@adonisjs/core/http'
 
-type responseJsonType = {
+type ResponseJsonType = {
   response: Response
   status: number
   success: boolean
   message: string
+  meta?: any
   data?: any
   errors?: any
 }
-export const responseJson = ({
+export const ResponseJson = ({
   response,
   status,
   success,
   message,
+  meta,
   data,
   errors,
-}: responseJsonType) => {
-  return response.status(status).send({
+}: ResponseJsonType) => {
+  response.status(status).send({
     success,
     message,
+    meta,
     data,
     errors,
   })
