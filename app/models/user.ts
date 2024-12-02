@@ -15,7 +15,10 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare id: number
 
   @column()
-  declare fullName: string | null
+  declare first_name: string
+
+  @column()
+  declare last_name: string
 
   @column()
   declare email: string
@@ -27,7 +30,7 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime | null
+  declare updatedAt: DateTime
 
   static accessTokens = DbAccessTokensProvider.forModel(User)
 

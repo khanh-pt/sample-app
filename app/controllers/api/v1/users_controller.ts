@@ -8,6 +8,5 @@ export default class UsersController {
     const user = await User.create(data)
 
     return response.created({ message: 'User created successfully', user })
-    response.send('hello')
   }
 }
