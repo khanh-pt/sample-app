@@ -9,8 +9,8 @@ export default class extends BaseSchema {
       table.string('name').notNullable().unique()
       table.text('description')
 
-      table.timestamp('created_at', { useTz: false, precision: 6 }).notNullable()
-      table.timestamp('updated_at', { useTz: false, precision: 6 }).notNullable()
+      table.timestamp('created_at', { precision: 6 }).notNullable()
+      table.timestamp('updated_at', { precision: 6 }).notNullable()
     })
   }
 

@@ -11,8 +11,8 @@ export default class extends BaseSchema {
       table.string('email', 254).notNullable().unique()
       table.string('password').notNullable()
 
-      table.timestamp('created_at', { useTz: false, precision: 6 }).notNullable()
-      table.timestamp('updated_at', { useTz: false, precision: 6 }).notNullable()
+      table.timestamp('created_at', { precision: 6 }).notNullable()
+      table.timestamp('updated_at', { precision: 6 }).notNullable()
     })
   }
 
