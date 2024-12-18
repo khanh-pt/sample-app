@@ -1,11 +1,12 @@
 import { DateTime } from 'luxon'
 import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
-import { BaseModel, column, hasMany, manyToMany, scope } from '@adonisjs/lucid/orm'
+import { BaseModel, afterCreate, afterUpdate, column, manyToMany, scope } from '@adonisjs/lucid/orm'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 import Role from '#models/role'
 import type { ManyToMany } from '@adonisjs/lucid/types/relations'
+import elasticsearchClient from '#services/elasticsearch'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -64,4 +65,33 @@ export default class User extends compose(BaseModel, AuthFinder) {
       }
     })
   })
+
+  @afterCreate()
+  public static async indexUser(user: User) {
+    await elasticsearchClient.index({
+      index: 'users',
+      id: user.id.toString(),
+      body: {
+        id: user.id,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        email: user.email,
+      },
+    })
+  }
+
+  @afterUpdate()
+  public static async updateUser(user: User) {
+    await elasticsearchClient.update({
+      index: 'users',
+      id: user.id.toString(),
+      body: {
+        doc: {
+          first_name: user.first_name,
+          last_name: user.last_name,
+          email: user.email,
+        },
+      },
+    })
+  }
 }
