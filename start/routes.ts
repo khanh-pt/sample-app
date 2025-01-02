@@ -15,7 +15,10 @@ const ManagerUsersController = () => import('#controllers/api/v1/manager/users_c
 
 router
   .group(() => {
-    router.resource('users', UsersController).only(['store'])
+    router
+      .resource('users', UsersController)
+      .only(['store', 'update'])
+      .use(['update'], middleware.auth())
     router.post('/register', [AuthController, 'register'])
     router.post('/login', [AuthController, 'login'])
     router.delete('/logout', [AuthController, 'logout']).use(middleware.auth())

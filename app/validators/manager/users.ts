@@ -7,7 +7,7 @@ export const listUsersValidator = vine.compile(
     filter: vine
       .record(vine.string())
       .validateKeys((keys, field) => {
-        const validColumns = ['email', 'full_name']
+        const validColumns = ['email', 'first_name', 'last_name']
         const validOperations = ['cont', 'eq']
         let invalidKeys: string[] = []
 
